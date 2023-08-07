@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load voted %}
+{% for x in a %}
+
+<form>
+  <div class="container col-md-6 col-sm-offset-8">
+    <div class="form-check">
+      <h1>{{forloop.counter}}.{{x.vtitle}}</h1>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="{{x.vtitle}}" id="flexRadioDefault1" value="{{x.option1}}">
+        <label class="form-check-label" for="flexRadioDefault1">
+          {{x.option1}} {{x.firstoption}}
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="{{x.vtitle}}" id="flexRadioDefault2" value="{{x.option2}}">
+        <label class="form-check-label" for="flexRadioDefault2">
+          {{x.option2}} {{x.secondoption}}
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="{{x.vtitle}}" id="flexRadioDefault3" value="{{x.option3}}">
+        <label class="form-check-label" for="flexRadioDefault3">
+          {{x.option3}} {{x.thirdoption}}
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="{{x.vtitle}}" id="flexRadioDefault4" value="{{x.option4}}">
+        <label class="form-check-label" for="flexRadioDefault4">
+          {{x.option4}} {{x.fourthoption}}
+        </label>
+      </div>
+
+      {% if x.id|votefilter:request.user.id %}
+      <button class="btn btn-danger save-button" type="button" data-blogid="{{x.id}}">Voted👍</button>
+      {% else %}
+      <button class="btn btn-danger save-button" type="button" data-blogid="{{x.id}}">Vote👍</button>
+
+      {% endif %}
+
+    </div>
+
+
+  </div>
+
+</form>
+{% endfor %}
+
+{% endblock %}
